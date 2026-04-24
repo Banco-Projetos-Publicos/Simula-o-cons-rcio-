@@ -18,7 +18,6 @@
             --text-main: #c0d0e8;
             --text-muted: #7a9ab8;
             --text-dark: #4a6a8a;
-            --error-bg: rgba(255, 92, 110, 0.1);
         }
 
         * { box-sizing: border-box; }
@@ -34,39 +33,23 @@
 
         /* Header e Layout */
         header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.2rem 2rem;
-            border-bottom: 1px solid var(--border);
-            background: rgba(11, 19, 32, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1.2rem 2rem; border-bottom: 1px solid var(--border);
+            background: rgba(11, 19, 32, 0.95); position: sticky; top: 0; z-index: 10;
         }
 
         .badge-quant {
-            background: var(--accent-green);
-            color: #000;
-            font-family: 'Courier New', monospace;
-            font-weight: 800;
-            font-size: 0.65rem;
-            letter-spacing: 0.1em;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
+            background: var(--accent-green); color: #000; font-family: monospace;
+            font-weight: 800; font-size: 0.65rem; letter-spacing: 0.1em;
+            padding: 0.3rem 0.6rem; border-radius: 4px;
         }
 
         .header-title h1 { font-size: 1.2rem; margin: 0; color: #fff; font-weight: 600; }
         .header-title p { font-size: 0.75rem; margin: 0; color: var(--text-muted); }
 
         .container {
-            display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 1.5rem;
-            padding: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            display: grid; grid-template-columns: 380px 1fr; gap: 1.5rem;
+            padding: 2rem; max-width: 1400px; margin: 0 auto; align-items: start;
         }
 
         @media (max-width: 960px) {
@@ -76,196 +59,74 @@
 
         /* Painéis */
         .panel {
-            background: var(--bg-panel);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            background: var(--bg-panel); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin: 1.5rem 0 1rem;
-        }
+        .section-header { display: flex; align-items: center; gap: 0.8rem; margin: 1.5rem 0 1rem; }
         .section-header:first-child { margin-top: 0; }
 
         .step-num {
-            background: rgba(79, 195, 247, 0.1);
-            border: 1px solid rgba(79, 195, 247, 0.3);
-            color: var(--accent-blue);
-            font-family: monospace;
-            font-size: 0.75rem;
-            font-weight: bold;
-            width: 1.8rem;
-            height: 1.8rem;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: rgba(79, 195, 247, 0.1); border: 1px solid rgba(79, 195, 247, 0.3);
+            color: var(--accent-blue); font-family: monospace; font-size: 0.75rem; font-weight: bold;
+            width: 1.8rem; height: 1.8rem; border-radius: 6px; display: flex; align-items: center; justify-content: center;
         }
-
-        .section-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+        .section-title { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
 
         /* UX Inputs */
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
+        .input-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; position: relative; }
         label { font-size: 0.8rem; font-weight: 500; color: var(--text-main); }
         .hint { font-size: 0.65rem; color: var(--text-dark); margin-top: -0.2rem; }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-        }
-
-        .prefix, .suffix {
-            position: absolute;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: var(--text-dark);
-            pointer-events: none;
-            z-index: 2;
-        }
-        .prefix { left: 0.8rem; }
-        .suffix { right: 0.8rem; }
+        
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .prefix, .suffix { position: absolute; font-family: monospace; font-size: 0.85rem; color: var(--text-dark); pointer-events: none; }
+        .prefix { left: 0.8rem; } .suffix { right: 0.8rem; }
 
         input[type="number"] {
-            width: 100%;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            padding: 0.7rem 0.8rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            outline: none;
+            width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+            border-radius: 8px; color: #fff; font-family: monospace; font-size: 1rem;
+            padding: 0.7rem 0.8rem; outline: none; transition: 0.2s;
         }
+        input[type="number"]:focus { border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15); }
+        input.has-prefix { padding-left: 2.5rem; } input.has-suffix { padding-right: 3rem; }
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
-        input[type="number"]:focus {
-            border-color: var(--border-focus);
-            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.15);
-        }
-        
-        input[type="number"].error {
-            border-color: var(--accent-red);
-            background: var(--error-bg);
-        }
+        input[type="range"] { width: 100%; accent-color: var(--accent-blue); cursor: pointer; height: 6px; background: var(--bg-input); border-radius: 3px; outline: none; }
 
-        input.has-prefix { padding-left: 2.5rem; }
-        input.has-suffix { padding-right: 3rem; }
-
-        /* Esconder setinhas do input number nativo para visual mais limpo */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
-
-        /* Range Slider UX */
-        .range-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
+        /* Health Check UI */
+        .health-check {
+            margin-top: 1rem; padding: 1rem; border-radius: 8px; font-size: 0.75rem; line-height: 1.4;
+            display: flex; flex-direction: column; gap: 0.5rem; transition: 0.3s;
         }
-        
-        .range-badge {
-            background: rgba(79, 195, 247, 0.1);
-            border: 1px solid var(--accent-blue);
-            color: var(--accent-blue);
-            font-family: monospace;
-            font-weight: 700;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-        }
+        .health-check.ok { background: rgba(0, 229, 160, 0.05); border: 1px solid rgba(0, 229, 160, 0.2); color: #80cfa9; }
+        .health-check.warn { background: rgba(255, 183, 77, 0.05); border: 1px solid rgba(255, 183, 77, 0.2); color: #ffca80; }
+        .health-check.error { background: rgba(255, 92, 110, 0.05); border: 1px solid rgba(255, 92, 110, 0.3); color: #ff8a98; }
 
-        input[type="range"] {
-            width: 100%;
-            accent-color: var(--accent-blue);
-            cursor: pointer;
-            height: 6px;
-            background: var(--bg-input);
-            border-radius: 3px;
-            outline: none;
-        }
+        .health-title { font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 0.4rem; }
+        .health-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.3rem; }
 
         /* Outputs e KPIs */
-        .status-bar {
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-family: monospace;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+        #resultados { transition: opacity 0.3s, filter 0.3s; }
+        #resultados.blocked { opacity: 0.3; filter: blur(4px); pointer-events: none; }
+        
+        .blocked-msg {
+            display: none; background: rgba(255, 92, 110, 0.1); border: 1px solid var(--accent-red);
+            color: var(--accent-red); padding: 1rem; border-radius: 8px; text-align: center;
+            font-weight: bold; margin-bottom: 1rem; font-size: 0.9rem;
         }
 
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .kpi-card {
-            background: rgba(15, 25, 41, 0.6);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: var(--border-focus);
-        }
-
-        .kpi-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; letter-spacing: 0.05em; }
-        .kpi-value { font-family: 'Courier New', monospace; font-size: 1.3rem; font-weight: 700; color: #fff; }
+        .status-bar { padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; font-family: monospace; font-weight: 700; font-size: 0.95rem; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .kpi-card { background: rgba(15, 25, 41, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; position: relative; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--border-focus); }
+        .kpi-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; }
+        .kpi-value { font-family: monospace; font-size: 1.3rem; font-weight: 700; color: #fff; }
         .kpi-sub { font-size: 0.7rem; color: var(--text-dark); margin-top: 0.3rem; }
 
-        .hero-card {
-            background: linear-gradient(145deg, #0f1c2e, #162842);
-            border: 1px solid rgba(79, 195, 247, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            box-shadow: inset 0 0 40px rgba(79, 195, 247, 0.05);
-        }
-
-        .fluxo-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.6rem 0;
-            border-bottom: 1px dashed var(--border);
-            font-size: 0.85rem;
-            color: var(--text-main);
-        }
+        .hero-card { background: linear-gradient(145deg, #0f1c2e, #162842); border: 1px solid rgba(79, 195, 247, 0.3); border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 1.5rem; }
+        .fluxo-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px dashed var(--border); font-size: 0.85rem; }
         .fluxo-row:last-child { border-bottom: none; }
-        .fluxo-val { font-family: 'Courier New', monospace; font-weight: 600; }
-
+        .fluxo-val { font-family: monospace; font-weight: 600; }
         .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
     </style>
 </head>
@@ -287,26 +148,21 @@
             </div>
             
             <div class="input-group">
-                <label>Valor do Bem / Carta de Crédito</label>
+                <label>Valor da Carta de Crédito (O Bem)</label>
                 <div class="input-wrapper">
                     <span class="prefix">R$</span>
-                    <input type="number" id="valorBem" value="100000" min="0" step="1000" class="has-prefix" onfocus="this.select()">
+                    <input type="number" id="valorBem" value="20000" min="0" step="1000" class="has-prefix" onfocus="this.select()">
                 </div>
             </div>
 
-            <div class="input-group">
-                <label>Taxa do Banco (CET % a.m.)</label>
-                <div class="input-wrapper">
-                    <input type="number" id="taxaBanco" value="1.80" min="0" step="0.01" class="has-suffix" onfocus="this.select()">
-                    <span class="suffix">%</span>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                <div class="input-group">
+                    <label>Taxa (a.m.)</label>
+                    <div class="input-wrapper"><input type="number" id="taxaBanco" value="1.80" min="0" step="0.01" class="has-suffix" onfocus="this.select()"><span class="suffix">%</span></div>
                 </div>
-            </div>
-
-            <div class="input-group">
-                <label>Prazo do Financiamento</label>
-                <div class="input-wrapper">
-                    <input type="number" id="prazoBanco" value="60" min="1" step="1" class="has-suffix" onfocus="this.select()">
-                    <span class="suffix">meses</span>
+                <div class="input-group">
+                    <label>Prazo</label>
+                    <div class="input-wrapper"><input type="number" id="prazoBanco" value="60" min="1" step="1" class="has-suffix" onfocus="this.select()"><span class="suffix">meses</span></div>
                 </div>
             </div>
 
@@ -318,36 +174,37 @@
             </div>
 
             <div class="input-group">
-                <label>Capital Investido (Custo de Aquisição)</label>
-                <span class="hint">Lance + parcelas pagas pelo vendedor</span>
+                <label>Capital Investido (Seu Custo)</label>
+                <span class="hint">Lance + parcelas já pagas por você</span>
                 <div class="input-wrapper">
                     <span class="prefix">R$</span>
-                    <input type="number" id="capitalInvestido" value="25000" min="0" step="500" class="has-prefix" onfocus="this.select()">
+                    <input type="number" id="capitalInvestido" value="10000" min="0" step="500" class="has-prefix" onfocus="this.select()">
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                <div class="input-group">
+                    <label>Faltam</label>
+                    <div class="input-wrapper"><input type="number" id="parcelasRestantes" value="50" min="0" step="1" class="has-suffix" onfocus="this.select()"><span class="suffix">parc.</span></div>
+                </div>
+                <div class="input-group">
+                    <label>Valor Parcela</label>
+                    <div class="input-wrapper"><span class="prefix">R$</span><input type="number" id="valorParcela" value="300" min="0" step="10" class="has-prefix" onfocus="this.select()"></div>
                 </div>
             </div>
 
             <div class="input-group">
-                <label>Parcelas Restantes</label>
-                <div class="input-wrapper">
-                    <input type="number" id="parcelasRestantes" value="48" min="0" step="1" class="has-suffix" onfocus="this.select()">
-                    <span class="suffix">parc.</span>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>Valor da Parcela Atual</label>
-                <div class="input-wrapper">
-                    <span class="prefix">R$</span>
-                    <input type="number" id="valorParcela" value="1200" min="0" step="10" class="has-prefix" onfocus="this.select()">
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>Taxa de Transferência da Cota</label>
+                <label>Taxa de Transferência (Administradora)</label>
                 <div class="input-wrapper">
                     <span class="prefix">R$</span>
                     <input type="number" id="taxaTransferencia" value="800" min="0" step="50" class="has-prefix" onfocus="this.select()">
                 </div>
+            </div>
+
+            <div id="healthPanel" class="health-check ok">
+                <div class="health-title" id="healthTitle">✔ Consórcio Válido</div>
+                <div class="health-row"><span>Custo Total do Consórcio:</span> <span id="hCusto" style="font-family:monospace; font-weight:bold;">R$ 0,00</span></div>
+                <div id="hMessage" style="margin-top:0.3rem;">Matemática consistente.</div>
             </div>
 
             <div class="divider"></div>
@@ -357,165 +214,146 @@
                 <div class="section-title">Estratégia de Preço</div>
             </div>
             
-            <div class="range-header">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
                 <label>Margem de Desconto ao Comprador</label>
-                <span id="margemLabel" class="range-badge">20%</span>
+                <span id="margemLabel" style="background:rgba(79,195,247,0.1); border:1px solid var(--accent-blue); color:var(--accent-blue); padding:0.2rem 0.5rem; border-radius:4px; font-family:monospace; font-weight:bold; font-size:0.8rem;">20%</span>
             </div>
-            <span class="hint" style="display:block; margin-bottom: 0.8rem;">Quão mais barato que o banco devemos ser?</span>
             <input type="range" id="margemSeguranca" min="1" max="50" value="20">
-            <div style="display:flex; justify-content:space-between; font-size:0.6rem; color:var(--text-dark); margin-top:0.3rem;">
-                <span>1% (Mais Lucro)</span>
-                <span>50% (Venda Rápida)</span>
-            </div>
         </aside>
 
-        <main id="resultados">
-            <div id="statusBox" class="status-bar">
-                <span id="statusIcon">▲</span> 
-                <span id="statusText">OPERAÇÃO LUCRATIVA</span>
-                <span id="statusRoi" style="margin-left:auto; background:rgba(0,0,0,0.2); padding:0.2rem 0.6rem; border-radius:4px;"></span>
+        <div>
+            <div id="blockedMessage" class="blocked-msg">
+                Os cálculos foram suspensos porque os dados do consórcio são matematicamente inválidos. Corrija os campos ao lado.
             </div>
 
-            <div class="kpi-grid">
-                <div class="kpi-card" style="--border-focus: var(--accent-blue)">
-                    <div class="kpi-label">Custo Total no Banco</div>
-                    <div id="kpiBanco" class="kpi-value">R$ 0,00</div>
-                    <div id="subBanco" class="kpi-sub">--</div>
+            <main id="resultados">
+                <div id="statusBox" class="status-bar">
+                    <span id="statusIcon">▲</span> 
+                    <span id="statusText">OPERAÇÃO LUCRATIVA</span>
+                    <span id="statusRoi" style="margin-left:auto; background:rgba(0,0,0,0.2); padding:0.2rem 0.6rem; border-radius:4px;"></span>
                 </div>
-                <div class="kpi-card" style="--border-focus: var(--accent-orange)">
-                    <div class="kpi-label">Saldo do Consórcio</div>
-                    <div id="kpiConsorcio" class="kpi-value">R$ 0,00</div>
-                    <div id="subConsorcio" class="kpi-sub">--</div>
-                </div>
-                <div class="kpi-card" id="cardLucro" style="--border-focus: var(--accent-green)">
-                    <div class="kpi-label">Lucro Líquido Real</div>
-                    <div id="kpiLucro" class="kpi-value">R$ 0,00</div>
-                    <div id="subLucro" class="kpi-sub">--</div>
-                </div>
-            </div>
 
-            <div class="hero-card">
-                <div style="font-size:0.75rem; color:var(--accent-blue); margin-bottom:0.8rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;">
-                    Valor de Venda da Cota (À Vista)
+                <div class="kpi-grid">
+                    <div class="kpi-card" style="--border-focus: var(--accent-blue)">
+                        <div class="kpi-label">Custo Total no Banco</div>
+                        <div id="kpiBanco" class="kpi-value">R$ 0,00</div>
+                        <div id="subBanco" class="kpi-sub">--</div>
+                    </div>
+                    <div class="kpi-card" style="--border-focus: var(--accent-orange)">
+                        <div class="kpi-label">Saldo Devedor Restante</div>
+                        <div id="kpiConsorcio" class="kpi-value">R$ 0,00</div>
+                        <div id="subConsorcio" class="kpi-sub">--</div>
+                    </div>
+                    <div class="kpi-card" id="cardLucro" style="--border-focus: var(--accent-green)">
+                        <div class="kpi-label">Lucro Líquido Real</div>
+                        <div id="kpiLucro" class="kpi-value">R$ 0,00</div>
+                        <div id="subLucro" class="kpi-sub">--</div>
+                    </div>
                 </div>
-                <div id="valorVenda" style="font-family:'Courier New', monospace; font-size:2.8rem; font-weight:800; color:#fff; letter-spacing:-0.03em;">
-                    R$ 0,00
-                </div>
-                <div id="economiaComprador" style="font-size:0.85rem; color:var(--accent-green); margin-top:1rem; font-weight:500;">
-                    Comprador economiza R$ 0,00 em relação ao banco
-                </div>
-            </div>
 
-            <div class="panel">
-                <div class="section-title" style="margin-bottom:1.2rem; font-size:0.85rem;">≡ Fluxo de Caixa da Venda</div>
-                
-                <div class="fluxo-row">
-                    <span>(+) Receita com a venda da cota</span> 
-                    <span id="f-venda" class="fluxo-val" style="color:var(--accent-green)">R$ 0,00</span>
+                <div class="hero-card">
+                    <div style="font-size:0.75rem; color:var(--accent-blue); margin-bottom:0.8rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;">
+                        Valor Justo de Venda da Cota (À Vista)
+                    </div>
+                    <div id="valorVenda" style="font-family:monospace; font-size:2.8rem; font-weight:800; color:#fff; letter-spacing:-0.03em;">
+                        R$ 0,00
+                    </div>
+                    <div id="economiaComprador" style="font-size:0.85rem; color:var(--accent-green); margin-top:1rem; font-weight:500;">
+                        Comprador economiza R$ 0,00 (vs Banco)
+                    </div>
                 </div>
-                <div class="fluxo-row">
-                    <span>(−) Capital Investido original</span> 
-                    <span id="f-capital" class="fluxo-val" style="color:var(--accent-red)">R$ 0,00</span>
+
+                <div class="panel">
+                    <div class="section-title" style="margin-bottom:1.2rem; font-size:0.85rem;">≡ Fluxo de Caixa da Venda</div>
+                    <div class="fluxo-row"><span>(+) Receita com a venda da cota à vista</span> <span id="f-venda" class="fluxo-val" style="color:var(--accent-green)">R$ 0,00</span></div>
+                    <div class="fluxo-row"><span>(−) O seu capital já investido</span> <span id="f-capital" class="fluxo-val" style="color:var(--accent-red)">R$ 0,00</span></div>
+                    <div class="fluxo-row"><span>(−) Taxa de Transferência (ADM)</span> <span id="f-taxa" class="fluxo-val" style="color:var(--accent-red)">R$ 0,00</span></div>
+                    <div class="fluxo-row"><span>(−) Provisão IR (15% s/ Ganho de Capital)</span> <span id="f-ir" class="fluxo-val" style="color:var(--accent-red)">R$ 0,00</span></div>
+                    
+                    <div class="fluxo-row" style="margin-top:1rem; padding-top:1rem; border-top:2px solid var(--border); font-size:1.1rem; font-weight:700;">
+                        <span style="color:#fff">SEU LUCRO LÍQUIDO FINAL</span> <span id="f-final" class="fluxo-val">R$ 0,00</span>
+                    </div>
                 </div>
-                <div class="fluxo-row">
-                    <span>(−) Taxa de Transferência (ADM)</span> 
-                    <span id="f-taxa" class="fluxo-val" style="color:var(--accent-red)">R$ 0,00</span>
-                </div>
-                <div class="fluxo-row">
-                    <span>(−) Provisão IR (15% s/ Ganho de Capital)</span> 
-                    <span id="f-ir" class="fluxo-val" style="color:var(--accent-red)">R$ 0,00</span>
-                </div>
-                
-                <div class="fluxo-row" style="margin-top:1rem; padding-top:1rem; border-top:2px solid var(--border); font-size:1.1rem; font-weight:700;">
-                    <span style="color:#fff">RESULTADO LÍQUIDO FINAL</span> 
-                    <span id="f-final" class="fluxo-val">R$ 0,00</span>
-                </div>
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
 
     <script>
-        /**
-         * MOTOR QUANTITATIVO - ARQUITETURA SÊNIOR
-         * Separação estrita entre Utilidades, Core Matemático e UI Controller.
-         */
-
-        // --- 1. UTILIDADES E FORMATAÇÃO ---
         const Format = {
-            currency: (val) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(val),
-            pct: (val) => new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(val) + "%"
+            cur: (v) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v),
+            pct: (v) => new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(v) + "%"
         };
 
-        // --- 2. EXTRAÇÃO SEGURA DE ESTADO (FAIL-SAFE) ---
-        // Previne NaN, strings vazias e garante regras de negócio nativas na extração
-        const State = {
-            getFloat: (id, min = 0) => {
-                const el = document.getElementById(id);
-                let val = parseFloat(el.value);
-                if (isNaN(val)) {
-                    el.classList.add('error');
-                    return min;
-                }
-                el.classList.remove('error');
-                return Math.max(val, min); // Garante que não teremos números irracionalmente negativos
-            },
-            getInt: (id, min = 0) => {
-                const el = document.getElementById(id);
-                let val = parseInt(el.value, 10);
-                if (isNaN(val)) {
-                    el.classList.add('error');
-                    return min;
-                }
-                el.classList.remove('error');
-                return Math.max(val, min);
+        const getVal = (id) => Math.max(parseFloat(document.getElementById(id).value) || 0, 0);
+
+        function validateConsortium(inputs) {
+            const saldoDevedor = inputs.parcelasRestantes * inputs.valorParcela;
+            const custoTotalConsorcio = inputs.capitalInvestido + saldoDevedor;
+            
+            // Taxa de ADM Implícita = Quanto se paga a mais do que a carta vale
+            const taxaAdmPct = inputs.valorBem > 0 ? ((custoTotalConsorcio / inputs.valorBem) - 1) * 100 : 0;
+
+            let status = 'ok';
+            let title = '✔ Consórcio Válido';
+            let msg = `Taxa de Administração implícita: ${Format.pct(taxaAdmPct)}. Padrão de mercado.`;
+
+            // REGRAS DE UX PARA LEIGOS ("BABY PROOF")
+            if (custoTotalConsorcio < inputs.valorBem) {
+                status = 'error';
+                title = '❌ Erro Matemático';
+                msg = `Impossível. O custo total (Investido + Parcelas) é ${Format.cur(custoTotalConsorcio)}, menor que a carta (${Format.cur(inputs.valorBem)}). Nenhuma administradora dá dinheiro de graça.`;
+            } else if (inputs.capitalInvestido >= inputs.valorBem) {
+                status = 'error';
+                title = '❌ Erro Matemático';
+                msg = `Você não pode ter investido um valor maior que a própria carta de crédito. Verifique os zeros digitados.`;
+            } else if (taxaAdmPct > 45) {
+                status = 'warn';
+                title = '⚠️ Atenção: Custo muito alto';
+                msg = `Taxa de ADM de ${Format.pct(taxaAdmPct)}! Consórcios normais cobram entre 15% e 25%. Verifique o valor da parcela.`;
+            } else if (taxaAdmPct < 5) {
+                status = 'warn';
+                title = '⚠️ Atenção: Custo muito baixo';
+                msg = `Taxa de ADM de apenas ${Format.pct(taxaAdmPct)}. Isso é extremamente raro e suspeito. Verifique as parcelas restantes.`;
             }
-        };
 
-        // --- 3. CORE MATEMÁTICO (REGRA DE NEGÓCIO ISOLADA) ---
-        const MathEngine = {
-            calcPrice: (pv, i, n) => {
-                if (n <= 0) return 0;
-                if (i === 0) return pv / n; // Tratamento de divisão por zero na taxa
-                const fator = Math.pow(1 + i, n);
-                return pv * (i * fator) / (fator - 1);
-            },
+            return { status, title, msg, custoTotalConsorcio, saldoDevedor };
+        }
 
-            simulate: (inputs) => {
-                // Passo 1: Custo Bancário
-                const prestacaoBanco = MathEngine.calcPrice(inputs.valorBem, inputs.taxaBancoMes, inputs.prazoBanco);
-                const custoTotalBanco = prestacaoBanco * inputs.prazoBanco;
-
-                // Passo 2: Saldo Devedor Consórcio
-                const saldoDevedor = inputs.parcelasRestantes * inputs.valorParcela;
-
-                // Passo 3: Spread Bruto (Arbitragem Máxima Teórica)
-                const spreadBruto = custoTotalBanco - saldoDevedor;
-
-                // Passo 4: Precificação da Cota
-                const vantagemComprador = spreadBruto * inputs.margemSeguranca;
-                const tetoDesembolso = custoTotalBanco - vantagemComprador;
-                const valorVendaCota = tetoDesembolso - saldoDevedor;
-                const agioBruto = valorVendaCota - inputs.capitalInvestido;
-
-                // Passo 5: Impostos e Resultado
-                // Regra tributária: 15% apenas se houver ganho de capital (Ágio Bruto > 0)
-                const impostoRenda = agioBruto > 0 ? agioBruto * 0.15 : 0;
-                const lucroLiquido = agioBruto - inputs.taxaTransferencia - impostoRenda;
-
-                const roi = inputs.capitalInvestido > 0 ? (lucroLiquido / inputs.capitalInvestido) * 100 : 0;
-                const isLucro = lucroLiquido > 0;
-
-                return {
-                    prestacaoBanco, custoTotalBanco, saldoDevedor, spreadBruto,
-                    vantagemComprador, valorVendaCota, agioBruto, impostoRenda,
-                    lucroLiquido, roi, isLucro
-                };
-            }
-        };
-
-        // --- 4. CONTROLLER DA INTERFACE ---
         function updateUI() {
-            // 4.1 Coleta Segura
             const inputs = {
-                valorBem: State.getFloat('valorBem'),
-                taxaBancoMes: State.getFloat
+                valorBem: getVal('valorBem'),
+                taxaBanco: getVal('taxaBanco') / 100,
+                prazoBanco: Math.max(getVal('prazoBanco'), 1),
+                capitalInvestido: getVal('capitalInvestido'),
+                parcelasRestantes: getVal('parcelasRestantes'),
+                valorParcela: getVal('valorParcela'),
+                taxaTransferencia: getVal('taxaTransferencia'),
+                margemSeguranca: getVal('margemSeguranca') / 100
+            };
+
+            document.getElementById('margemLabel').innerText = (inputs.margemSeguranca * 100) + '%';
+
+            // 1. Roda a Validação "À prova de bebês"
+            const health = validateConsortium(inputs);
+            const hPanel = document.getElementById('healthPanel');
+            hPanel.className = `health-check ${health.status}`;
+            document.getElementById('healthTitle').innerText = health.title;
+            document.getElementById('hCusto').innerText = Format.cur(health.custoTotalConsorcio);
+            document.getElementById('hMessage').innerText = health.msg;
+
+            // Bloqueia a tela de resultados se for um erro matemático grave
+            const isBlocked = health.status === 'error';
+            document.getElementById('resultados').className = isBlocked ? 'blocked' : '';
+            document.getElementById('blockedMessage').style.display = isBlocked ? 'block' : 'none';
+
+            if (isBlocked) return; // Aborta cálculo se os dados iniciais forem impossíveis
+
+            // 2. Continua para o Motor Matemático (se os dados forem sãos)
+            const prestacaoBanco = inputs.taxaBanco === 0 ? inputs.valorBem / inputs.prazoBanco : 
+                                   inputs.valorBem * (inputs.taxaBanco * Math.pow(1 + inputs.taxaBanco, inputs.prazoBanco)) / (Math.pow(1 + inputs.taxaBanco, inputs.prazoBanco) - 1);
+            
+            const custoBanco = prestacaoBanco * inputs.prazoBanco;
+            const spreadBruto = custoBanco - health.saldoDevedor;
+            const vantagemComprador = spreadBruto * inputs.margemSeguranca;
+            
+            const valorVenda = (custoBanco - vantagemComprador) - hea
