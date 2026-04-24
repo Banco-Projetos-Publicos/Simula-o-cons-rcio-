@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Arbitragem - Motor Quant</title>
+    <style>
+        :root {
+            --bg-deep: #080f1c;
+            --bg-panel: #0b1523;
+            --bg-input: #0c1624;
+            --border: #162535;
+            --accent-blue: #4fc3f7;
+            --accent-green: #00e5a0;
+            --accent-red: #ff5c6e;
+            --accent-orange: #ffb74d;
+            --text-main: #c0d0e8;
+            --text-muted: #7a9ab8;
+            --text-dark: #3d6080;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid #152030;
+            background: #0a1220;
+        }
+
+        .badge-quant {
+            background: var(--accent-green);
+            color: #000;
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            padding: 0.25rem 0.55rem;
+            borderRadius: 3px;
+        }
+
+        .header-title h1 {
+            font-size: 1.15rem;
+            margin: 0;
+            color: #e0ecff;
+        }
+
+        .header-title p {
+            font-size: 0.7rem;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .version {
+            margin-left: auto;
+            font-family: monospace;
+            font-size: 0.62rem;
+            color: var(--accent-blue);
+            border: 1px solid #1a3a58;
+            padding: 0.25rem 0.65rem;
+            border-radius: 3px;
+        }
+
+        /* Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 1.2rem;
+            padding: 1.2rem 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        /* Painéis */
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.3rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0.8rem 0 0.6rem;
+        }
+
+        .step-num {
+            background: #122030;
+            border: 1px solid #1e3d5a;
+            color: var(--accent-blue);
+            font-family: monospace;
+            font-size: 0.7rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #5a849c;
+            text-transform: uppercase;
+        }
+
+        /* Inputs */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        label { font-size: 0.74rem; color: var(--text-muted); }
+        .hint { font-size: 0.64rem; color: var(--text-dark); }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .prefix, .suffix {
+            position: absolute;
+            font-family: monospace;
+            font-size: 0.78rem;
+            color: var(--text-dark);
+            pointer-events: none;
+        }
+
+        .prefix { left: 0.7rem; }
+        .suffix { right: 0.7rem; }
+
+        input[type="number"], input[type="range"] {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid #1a2a3e;
+            border-radius: 6px;
+            color: #c0d0e8;
+            padding: 0.5rem 0.8rem;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input[type="number"].has-prefix { padding-left: 2.4rem; }
+        input[type="number"].has-suffix { padding-right: 2.8rem; }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .kpi-card {
+            background: #0b1523;
+            border: 1px solid rgba(79, 195, 247, 0.25);
+            border-radius: 9px;
+            padding: 0.9rem 1rem;
+        }
+
+        .kpi-label { font-size: 0.62rem; color: #4a6a88; text-transform: uppercase; margin-bottom: 0.4rem; }
+        .kpi-value { font-family: 'Courier New', monospace; font-size: 1.15rem; font-weight: 700; }
+        .kpi-sub { font-size: 0.64rem; color: #3a5878; margin-top: 0.25rem; }
+
+        /* Destaque Venda */
+        .venda-hero {
+            background: linear-gradient(135deg, #0c1a30, #0f2040);
+            border: 1px solid #1a3a60;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            padding: 0.85rem 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: monospace;
+            font-weight: 700;
+        }
+
+        /* Fluxo de Caixa */
+        .fluxo-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid #0f1a28;
+            font-size: 0.8rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1a2d40, transparent);
+            margin: 1rem 0;
+        }
+
+        .comparativo-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+        }
+
+        .comp-item {
+            background: #070e1c;
+            border: 1px solid #101e2e;
+            padding: 0.85rem;
+            text-align: center;
+            border-radius: 7px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="badge-quant">QUANT</span>
+        <div class="header-title">
+            <h1>Simulador de Arbitragem</h1>
+            <p>Consórcio Contemplado ↔ Financiamento Bancário</p>
+        </div>
+        <div class="version">MOTOR MATEMÁTICO v1.0</div>
+    </header>
+
+    <div class="container">
+        <div class="panel">
+            <div class="section-header">
+                <div class="step-num">A</div>
+                <div class="section-title">Dados do Mercado — O Banco</div>
+            </div>
+            
+            <div class="input-group">
+                <label>Valor do Bem / Carta de Crédito</label>
+                <div class="input-wrapper">
+                    <span class="prefix">R$</span>
+                    <input type="number" id="valorBem" value="100000" class="has-prefix">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Taxa do Banco (CET % a.m.)</label>
+                <span class="hint">Custo Efetivo Total ao mês</span>
+                <div class="input-wrapper">
+                    <input type="number" id="taxaBanco" value="1.8" step="0.01" class="has-suffix">
+                    <span class="suffix">%</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Prazo do Financiamento Bancário</label>
+                <div class="input-wrapper">
+                    <input type="number" id="prazoBanco" value="60" class="has-suffix">
+                    <span class="suffix">meses</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-header">
+                <div class="step-num">B</div>
+                <div class="section-title">Dados da Operação — O Consórcio</div>
+            </div>
+
+            <div class="input-group">
+                <label>Capital Investido (lance + parcelas)</label>
+                <div class="input-wrapper">
+                    <span class="prefix">R$</span>
+                    <input type="number" id="capitalInvestido" value="25000" class="has-prefix">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Parcelas Restantes</label>
+                <div class="input-wrapper">
+                    <input type="number" id="parcelasRestantes" value="48" class="has-suffix">
+                    <span class="suffix">parc.</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Valor da Parcela Atual</label>
+                <div class="input-wrapper">
+                    <span class="prefix">R$</span>
+                    <input type="number" id="valorParcela" value="1200" class="has-prefix">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Taxa de Transferência</label>
+                <div class="input-wrapper">
+                    <span class="prefix">R$</span>
+                    <input type="number" id="taxaTransferencia" value="800" class="has-prefix">
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-header">
+                <div class="step-num">C</div>
+                <div class="section-title">Estratégia de Preço</div>
+            </div>
+            
+            <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                <label>Margem de Segurança</label>
+                <span id="margemLabel" style="color:var(--accent-blue); font-family:monospace; font-weight:bold;">20%</span>
+            </div>
+            <input type="range" id="margemSeguranca" min="1" max="50" value="20" style="accent-color: var(--accent-blue);">
+        </div>
+
+        <div id="resultados">
+            <div id="statusBox" class="status-bar"></div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Custo Total no Banco</div>
+                    <div id="kpiBanco" class="kpi-value" style="color:var(--accent-blue)"></div>
+                    <div id="subBanco" class="kpi-sub"></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Saldo do Consórcio</div>
+                    <div id="kpiConsorcio" class="kpi-value" style="color:var(--accent-orange)"></div>
+                    <div id="subConsorcio" class="kpi-sub"></div>
+                </div>
+                <div class="kpi-card" style="border-color: var(--accent-green);">
+                    <div class="kpi-label">Lucro Líquido Final</div>
+                    <div id="kpiLucro" class="kpi-value"></div>
+                    <div id="subLucro" class="kpi-sub"></div>
+                </div>
+            </div>
+
+            <div class="venda-hero">
+                <div style="font-size:0.72rem; color:#5a84a0; margin-bottom:0.5rem; letter-spacing:0.06em;">💰 VALOR DE VENDA DA COTA — ÁGIO</div>
+                <div id="valorVenda" style="font-family:'Courier New', monospace; font-size:2.1rem; font-weight:700; color:#e0f0ff;"></div>
+                <div id="economiaComprador" style="font-size:0.71rem; color:var(--accent-green); mt:0.45rem;"></div>
+            </div>
+
+            <div class="panel">
+                <div class="section-title" style="margin-bottom:1rem;">≡ Fluxo de Caixa da Venda</div>
+                <div class="fluxo-row"><span>(+) Valor cobrado à vista</span> <span id="f-venda" style="color:var(--accent-green)"></span></div>
+                <div class="fluxo-row"><span>(−) Capital original investido</span> <span id="f-capital" style="color:var(--accent-red)"></span></div>
+                <div class="fluxo-row"><span>(−) Taxa de transferência</span> <span id="f-taxa" style="color:var(--accent-red)"></span></div>
+                <div class="fluxo-row"><span>(−) Provisão IR (15%)</span> <span id="f-ir" style="color:var(--accent-red)"></span></div>
+                <div class="fluxo-row" style="border:none; margin-top:0.5rem; font-size:1.1rem; font-weight:bold;">
+                    <span>RESULTADO LÍQUIDO</span> <span id="f-final"></span>
+                </div>
+            </div>
+
+            <div class="panel" style="margin-top:1rem;">
+                <div class="section-title" style="margin-bottom:1rem;">◈ Análise Comparativa</div>
+                <div class="comparativo-grid">
+                    <div class="comp-item">
+                        <div class="hint">ECONOMIA COMPRADOR</div>
+                        <div id="c-econ" style="color:var(--accent-green); font-weight:bold; margin-top:0.4rem;"></div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="hint">SPREAD BRUTO</div>
+                        <div id="c-spread" style="color:var(--accent-blue); font-weight:bold; margin-top:0.4rem;"></div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="hint">ÁGIO S/ CARTA</div>
+                        <div id="c-agio-pct" style="color:var(--accent-orange); font-weight:bold; margin-top:0.4rem;"></div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="hint">MARGEM LÍQUIDA</div>
+                        <div id="c-margem-liq" style="font-weight:bold; margin-top:0.4rem;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="font-size:0.64rem; color:var(--text-dark); margin-top:1rem; line-height:1.5;">
+                ⚠ Este simulador tem fins educacionais. Valores de IR são estimativos. Consulte um profissional antes de operar.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const fmt = (v) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v || 0);
+
+        function calcPrestacaoBanco(pv, i, n) {
+            if (n <= 0) return 0;
+            if (i === 0) return pv / n;
+            const fator = Math.pow(1 + i, n);
+            return pv * (i * fator) / (fator - 1);
+        }
+
+        function update() {
+            // Inputs
+            const valorBem = parseFloat(document.getElementById('valorBem').value) || 0;
+            const taxaBancoMes = (parseFloat(document.getElementById('taxaBanco').value) || 0) / 100;
+            const prazoBanco = parseInt(document.getElementById('prazoBanco').value) || 0;
+            const capitalInvestido = parseFloat(document.getElementById('capitalInvestido').value) || 0;
+            const parcelasRestantes = parseInt(document.getElementById('parcelasRestantes').value) || 0;
+            const valorParcela = parseFloat(document.getElementById('valorParcela').value) || 0;
+            const taxaTransferencia = parseFloat(document.getElementById('taxaTransferencia').value) || 0;
+            const margemSeguranca = (parseInt(document.getElementById('margemSeguranca').value) || 0) / 100;
+
+            document.getElementById('margemLabel').innerText = (margemSeguranca * 100) + '%';
+
+            // Cálculos
+            const prestacaoBanco = calcPrestacaoBanco(valorBem, taxaBancoMes, prazoBanco);
+            const custoTotalBanco = prestacaoBanco * prazoBanco;
+            const saldoDevedor = parcelasRestantes * valorParcela;
+            const spreadBruto = custoTotalBanco - saldoDevedor;
+
+            const vantagemComprador = spreadBruto * margemSeguranca;
+            const tetoDesembolso = custoTotalBanco - vantagemComprador;
+            const valorVendaCota = tetoDesembolso - saldoDevedor;
+            const agioBruto = valorVendaCota - capitalInvestido;
+
+            const impostoRenda = agioBruto > 0 ? agioBruto * 0.15 : 0;
+            const lucroLiquido = agioBruto - taxaTransferencia - impostoRenda;
+
+            const isLucro = lucroLiquido > 0;
+            const roi = capitalInvestido > 0 ? (lucroLiquido / capitalInvestido) * 100 : 0;
+
+            // UI Update
+            const statusBox = document.getElementById('statusBox');
+            statusBox.style.background = isLucro ? "rgba(0,229,160,0.07)" : "rgba(255,92,110,0.07)";
+            statusBox.style.border = `1px solid ${isLucro ? '#00e5a0' : '#ff5c6e'}`;
+            statusBox.style.color = isLucro ? '#00e5a0' : '#ff5c6e';
+            statusBox.innerHTML = `<span>${isLucro ? '▲' : '▼'}</span> OPERAÇÃO ${isLucro ? 'LUCRATIVA' : 'DEFICITÁRIA'} ${isLucro ? '<span style="margin-left:auto">ROI '+roi.toFixed(1)+'%</span>' : ''}`;
+
+            document.getElementById('kpiBanco').innerText = fmt(custoTotalBanco);
+            document.getElementById('subBanco').innerText = `${prazoBanco}x ${fmt(prestacaoBanco)}/mês`;
+
+            document.getElementById('kpiConsorcio').innerText = fmt(saldoDevedor);
+            document.getElementById('subConsorcio').innerText = `${parcelasRestantes}x ${fmt(valorParcela)}/mês`;
+
+            document.getElementById('kpiLucro').innerText = fmt(lucroLiquido);
+            document.getElementById('kpiLucro').style.color = isLucro ? '#00e5a0' : '#ff5c6e';
+            document.getElementById('subLucro').innerText = isLucro ? `↑ ${roi.toFixed(1)}% sobre capital` : "Abaixo do ponto de equilíbrio";
+
+            document.getElementById('valorVenda').innerText = fmt(valorVendaCota);
+            document.getElementById('economiaComprador').innerText = `O comprador economiza ${fmt(vantagemComprador)} em relação ao banco`;
+
+            // Fluxo
+            document.getElementById('f-venda').innerText = `+ ${fmt(valorVendaCota)}`;
+            document.getElementById('f-capital').innerText = `- ${fmt(capitalInvestido)}`;
+            document.getElementById('f-taxa').innerText = `- ${fmt(taxaTransferencia)}`;
+            document.getElementById('f-ir').innerText = `- ${fmt(impostoRenda)}`;
+            document.getElementById('f-final').innerText = fmt(lucroLiquido);
+            document.getElementById('f-final').style.color = isLucro ? '#00e5a0' : '#ff5c6e';
+
+            // Comparativo
+            document.getElementById('c-econ').innerText = fmt(vantagemComprador);
+            document.getElementById('c-spread').innerText = fmt(spreadBruto);
+            document.getElementById('c-agio-pct').innerText = ((valorVendaCota / valorBem) * 100).toFixed(1) + '%';
+            document.getElementById('c-margem-liq').innerText = ((lucroLiquido / valorVendaCota) * 100).toFixed(1) + '%';
+            document.getElementById('c-margem-liq').style.color = isLucro ? '#00e5a0' : '#ff5c6e';
+        }
+
+        // Listeners
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => input.addEventListener('input', update));
+
+        // Init
+        update();
+    </script>
+</body>
+  </html>
+  
